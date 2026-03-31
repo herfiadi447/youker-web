@@ -115,7 +115,7 @@ def chat():
     # Check if there's a language preference from frontend
     language = data.get("lang", "id") # default indonesian
     
-    system_prompt = \"\"\"
+    system_prompt = """
 Anda adalah assistan virtual resmi untuk "Youker Web Solutions", sebuah agensi pengembangan web.
 Layanan kami meliputi:
 1. Website Portofolio (Personal / Profesional)
@@ -134,10 +134,10 @@ Informasi Tambahan:
 
 Berikan respons yang ringkas, ramah, profesional, dan gunakan poin-poin jika menjelaskan harga atau layanan.
 Jika diminta kontak untuk proyek, berikan link WhatsApp (wa.me/6282285580351) atau sarankan untuk mengisi form di halaman ini.
-\"\"\"
+"""
 
     if language == "en":
-        system_prompt = \"\"\"
+        system_prompt = """
 You are the official virtual assistant for "Youker Web Solutions", a web development agency.
 Our services include:
 1. Portfolio Websites (Personal / Professional)
@@ -156,7 +156,7 @@ Additional Information:
 
 Provide concise, friendly, professional responses and use bullet points when explaining prices or services.
 If asked for project contact, provide the WhatsApp link (wa.me/6282285580351) or suggest filling out the form on this page.
-\"\"\"
+"""
 
     try:
         chat_completion = groq_client.chat.completions.create(
