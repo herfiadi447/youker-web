@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% set active_page = 'pricing' %}
+{% block title %}Pricing | Youker Web Solutions{% endblock %}
+
+{% block content %}
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <!-- Hero Header -->
+    <header class="text-center mb-24">
+        <span class="font-label text-tertiary-fixed-dim uppercase tracking-[0.3em] text-xs font-bold block mb-4">Pricing Models</span>
+        <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-on-surface mb-6">
+            Investment for the <span class="text-primary italic">Digital Frontier</span>
+        </h1>
+        <p class="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl leading-relaxed">
+            Scalable architectures tailored for businesses requiring precision GIS, high-performance Flask backends, and intelligent AI integrations.
+        </p>
+    </header>
+    
+    <!-- Pricing Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- Basic Tier -->
+        <div class="bg-surface-container-high rounded-xl p-8 flex flex-col border border-outline-variant/10 transition-transform duration-300 hover:-translate-y-2">
+            <div class="mb-8">
+                <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Basic</h3>
+                <p class="text-on-surface-variant text-sm font-label uppercase tracking-widest mb-6">Foundational Presence</p>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-4xl font-headline font-bold text-primary">Rp 1.050k</span>
+                    <span class="text-on-surface-variant text-sm">/ project start</span>
+                </div>
+                <div class="text-xs text-[#dae2fd]/50 mt-1 line-through">Mulai dari Rp 1.500.000</div>
+            </div>
+            <ul class="space-y-4 mb-12 flex-grow">
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">1 Bespoke Landing Page</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">WhatsApp API Integration</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">Responsive Mobile Optimization</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm opacity-40">
+                    <span class="material-symbols-outlined text-outline text-lg" data-icon="cancel">cancel</span>
+                    <span class="text-on-surface/80">Web GIS Components</span>
+                </li>
+            </ul>
+            <a href="{{ url_for('home') }}#contact" class="w-full text-center py-4 rounded-full border border-primary text-primary font-label font-bold tracking-wide hover:bg-primary/5 transition-colors no-invert inline-block">
+                Deploy Basic
+            </a>
+        </div>
+        
+        <!-- Standard Tier (Highlighted) -->
+        <div class="relative bg-surface-container-highest rounded-xl p-8 flex flex-col border border-primary/20 shadow-2xl shadow-primary/5 transition-transform duration-300 hover:-translate-y-2 overflow-hidden">
+            <div class="absolute top-0 right-0 bg-primary text-on-primary font-label text-[10px] font-bold px-4 py-1 uppercase tracking-tighter transform rotate-0 rounded-bl-lg no-invert">Most Popular</div>
+            <div class="mb-8">
+                <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Standard</h3>
+                <p class="text-on-surface-variant text-sm font-label uppercase tracking-widest mb-6">Dynamic Enterprise</p>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-4xl font-headline font-bold text-primary">Rp 3.500k</span>
+                    <span class="text-on-surface-variant text-sm">/ project start</span>
+                </div>
+                <div class="text-xs text-[#dae2fd]/50 mt-1 line-through">Mulai dari Rp 5.000.000</div>
+            </div>
+            <ul class="space-y-4 mb-12 flex-grow">
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">Up to 5 Pages (Flask/React)</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">Custom Database Architecture</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">SEO &amp; Core Web Vitals Audit</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">Contact CRM Integration</span>
+                </li>
+            </ul>
+            <a href="{{ url_for('home') }}#contact" class="w-full text-center py-4 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-bold tracking-wide shadow-[0_4px_15px_rgba(0,218,243,0.3)] hover:shadow-[0_6px_25px_rgba(0,218,243,0.5)] transition-all no-invert inline-block">
+                Initiate Standard
+            </a>
+        </div>
+        
+        <!-- Premium Tier -->
+        <div class="bg-surface-container-high rounded-xl p-8 flex flex-col border border-outline-variant/10 transition-transform duration-300 hover:-translate-y-2">
+            <div class="mb-8">
+                <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Premium</h3>
+                <p class="text-on-surface-variant text-sm font-label uppercase tracking-widest mb-6">Algorithmic Ecosystem</p>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-4xl font-headline font-bold text-primary">Custom</span>
+                    <span class="text-on-surface-variant text-sm">Quote</span>
+                </div>
+            </div>
+            <ul class="space-y-4 mb-12 flex-grow">
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80 font-semibold text-tertiary">Advanced Web GIS Integration</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">Custom AI Chatbot (LLM-based)</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">Full Admin Panel &amp; Analytics</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm">
+                    <span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                    <span class="text-on-surface/80">3 Months Priority Tech Support</span>
+                </li>
+            </ul>
+            <a href="mailto:herfiadireskialviansyah03@gmail.com" class="w-full text-center py-4 rounded-full border border-primary text-primary font-label font-bold tracking-wide hover:bg-primary/5 transition-colors no-invert inline-block">
+                Architect Premium
+            </a>
+        </div>
+    </div>
+    
+    <!-- Custom Quote Section -->
+    <section class="mt-20 glass-effect rounded-xl p-1 md:p-12 overflow-hidden relative">
+        <div class="flex flex-col md:flex-row items-center gap-12 relative z-10 p-8 md:p-0">
+            <div class="flex-1">
+                <h2 class="font-headline text-3xl font-bold text-on-surface mb-4">Need a Custom Blueprint?</h2>
+                <p class="text-on-surface-variant leading-relaxed mb-8">
+                    For complex GIS requirements, specific industrial IoT integrations, or large-scale legacy system migrations, our architects will design a bespoke solution.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-lg text-xs font-label">
+                        <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                        GIS SPECIALISTS
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-lg text-xs font-label">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        AI INTEGRATORS
+                    </div>
+                </div>
+            </div>
+            <div class="flex-shrink-0">
+                <a href="https://wa.me/6282285580351" target="_blank" class="px-10 py-5 bg-on-surface text-surface font-label font-extrabold uppercase tracking-widest text-sm rounded-lg hover:bg-primary transition-colors duration-300 inline-block no-invert">
+                    Request a Quote
+                </a>
+            </div>
+        </div>
+        <!-- Aesthetic Data Grid Overlay Background -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#00daf3 1px, transparent 1px); background-size: 30px 30px;"></div>
+    </section>
+    
+    <!-- GIS / AI Status Decorative Section -->
+    <section class="mt-24 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-surface-container-low p-6 rounded-lg text-center border border-outline-variant/10">
+            <span class="block font-headline text-3xl font-bold text-[#00daf3] mb-1">99.9%</span>
+            <span class="text-xs font-label uppercase tracking-widest opacity-60">Uptime Architecture</span>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-lg text-center border border-outline-variant/10">
+            <span class="block font-headline text-3xl font-bold text-[#00daf3] mb-1">200ms</span>
+            <span class="text-xs font-label uppercase tracking-widest opacity-60">Avg. GIS Latency</span>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-lg text-center border border-outline-variant/10">
+            <span class="block font-headline text-3xl font-bold text-[#00daf3] mb-1">24/7</span>
+            <span class="text-xs font-label uppercase tracking-widest opacity-60">Automated Monitoring</span>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-lg text-center border border-outline-variant/10">
+            <span class="block font-headline text-3xl font-bold text-[#00daf3] mb-1">128-bit</span>
+            <span class="text-xs font-label uppercase tracking-widest opacity-60">End-to-End Encryption</span>
+        </div>
+    </section>
+</main>
+{% endblock %}

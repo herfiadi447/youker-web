@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="dark" lang="id" id="html-root">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>{% block title %}Youker Web Solutions{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#131b2e",
+                        "secondary": "#96ceeb",
+                        "surface": "#0b1326",
+                        "surface-container": "#171f33",
+                        "primary": "#00daf3",
+                        "primary-container": "#004d56",
+                        "on-primary": "#00363d",
+                        "on-surface-variant": "#c0c7cd",
+                        "on-background": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "surface-container-highest": "#2d3449",
+                        "surface-variant": "#2d3449",
+                        "surface-container-lowest": "#060e20",
+                        "tertiary": "#59dad1",
+                        "background": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "outline-variant": "#40484c",
+                        "outline": "#8a9297"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(45, 52, 73, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(0, 218, 243, 0.3);
+        }
+        
+        /* Light Mode Overrides */
+        html.light {
+            filter: invert(1) hue-rotate(180deg);
+        }
+        html.light img, html.light video, html.light iframe, html.light .no-invert {
+            filter: invert(1) hue-rotate(180deg);
+        }
+        html.light .bg-surface-container-lowest {
+            background-color: #f8fafc !important;
+        }
+        
+        /* Chatbot Styles */
+        #chatbot-widget {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        #chatbot-widget.hidden-chat {
+            transform: translateY(150%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .message-bubble {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        .msg-user {
+            background: #00daf3;
+            color: #00363d;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+        .msg-ai {
+            background: #171f33;
+            color: #dae2fd;
+            border: 1px solid rgba(64, 72, 76, 0.3);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0b1326]/80 backdrop-blur-xl shadow-2xl shadow-[#004B63]/10 no-invert">
+    <div class="flex justify-between items-center px-4 md:px-8 py-4 max-w-7xl mx-auto">
+        <div class="text-xl md:text-2xl font-bold tracking-tighter text-[#00daf3] font-headline">
+            Youker Web Solutions
+        </div>
+        <div class="hidden md:flex items-center space-x-8 font-['Space_Grotesk'] tracking-tight text-sm font-medium">
+            <a class="text-[#dae2fd] opacity-80 hover:opacity-100 transition-colors hover:text-[#00daf3] {% if active_page == 'home' %}border-b-2 border-[#00daf3] pb-1 opacity-100 text-[#00daf3]{% endif %}" href="{{ url_for('home') }}">Services</a>
+            <a class="text-[#dae2fd] opacity-80 hover:opacity-100 transition-colors hover:text-[#00daf3] {% if active_page == 'portfolio' %}border-b-2 border-[#00daf3] pb-1 opacity-100 text-[#00daf3]{% endif %}" href="{{ url_for('portfolio') }}">Portfolio</a>
+            <a class="text-[#dae2fd] opacity-80 hover:opacity-100 transition-colors hover:text-[#00daf3] {% if active_page == 'pricing' %}border-b-2 border-[#00daf3] pb-1 opacity-100 text-[#00daf3]{% endif %}" href="{{ url_for('pricing') }}">Pricing</a>
+            <a class="text-[#dae2fd] opacity-80 hover:opacity-100 transition-colors hover:text-[#00daf3] {% if active_page == 'gis' %}border-b-2 border-[#00daf3] pb-1 opacity-100 text-[#00daf3]{% endif %}" href="{{ url_for('gis') }}">GIS Demo</a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <!-- Language Toggle -->
+            <button id="lang-toggle" onclick="toggleLanguage()" class="text-[#dae2fd] text-xs font-bold px-2 py-1 rounded bg-[#171f33] border border-[#40484c] hover:bg-[#2d3449] transition-colors">
+                EN
+            </button>
+            
+            <!-- Dark/Light Mode Toggle -->
+            <button id="theme-toggle" onclick="toggleTheme()" class="text-[#dae2fd] opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+            </button>
+
+            <!-- Translate Element hidden, mapped to toggle -->
+            <div id="google_translate_element" style="display:none;"></div>
+            
+            <a href="https://wa.me/6282285580351" target="_blank" class="hidden sm:inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-full font-label font-bold text-sm tracking-wide glow-hover transition-all active:scale-95 duration-150">
+                Contact Us
+            </a>
+        </div>
+    </div>
+    <div class="bg-[#131b2e] h-[1px] opacity-20"></div>
+</nav>
+
+<!-- Main Content -->
+<div class="flex-grow">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!-- Floating Chatbot Widget -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <!-- Chat Window -->
+    <div id="chatbot-widget" class="hidden-chat w-80 md:w-96 bg-[#0b1326] border border-[#00daf3]/30 rounded-2xl shadow-2xl flex flex-col mb-4 overflow-hidden no-invert">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-[#004d56] to-[#0b1326] p-4 flex justify-between items-center border-b border-[#00daf3]/20">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-[#00daf3]/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#00daf3] text-sm">smart_toy</span>
+                </div>
+                <div>
+                    <h4 class="text-[#dae2fd] font-bold text-sm">Youker AI Assistant</h4>
+                    <p class="text-[#dae2fd]/60 text-xs">Online & Ready</p>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="text-[#dae2fd]/60 hover:text-[#dae2fd] transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <!-- Chat Body -->
+        <div id="chat-messages" class="flex-1 p-4 h-80 overflow-y-auto flex flex-col gap-2 bg-[#131b2e]/50">
+            <div class="msg-ai message-bubble">
+                Halo! Saya asisten AI Youker Web Solutions. Ada yang bisa saya bantu mengenai pembuatan website, aplikasi custom, atau Web GIS?
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="p-3 border-t border-[#40484c]/30 bg-[#0b1326]">
+            <form id="chat-form" class="flex gap-2" onsubmit="handleChatSubmit(event)">
+                <input type="text" id="chat-input" placeholder="Ketik pesan Anda..." class="flex-1 bg-[#131b2e] border border-[#40484c] rounded-full px-4 py-2 text-sm text-[#dae2fd] focus:outline-none focus:border-[#00daf3] transition-colors" required>
+                <button type="submit" class="w-10 h-10 rounded-full bg-[#00daf3] text-[#00363d] flex items-center justify-center hover:bg-[#59dad1] transition-colors">
+                    <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Floating Button -->
+    <button onclick="toggleChat()" class="w-14 h-14 rounded-full bg-gradient-to-br from-[#00daf3] to-[#59dad1] text-[#00363d] shadow-[0_0_20px_rgba(0,218,243,0.4)] flex items-center justify-center hover:scale-110 transition-transform relative no-invert">
+        <span class="material-symbols-outlined text-2xl">chat</span>
+        <span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-red-500 border-2 border-[#0b1326]"></span>
+    </button>
+</div>
+
+<!-- Footer -->
+<footer class="bg-[#0b1326] w-full border-t border-[#40484c]/15 text-sm leading-relaxed mt-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto font-['Inter']">
+        <div class="col-span-1 md:col-span-1">
+            <div class="text-xl font-bold text-[#dae2fd] mb-4 font-headline">Youker Web Solutions</div>
+            <p class="text-[#dae2fd]/60 mb-6">Arsitektur Digital Presisi. Menggabungkan Geospasial, AI, dan Python untuk Masa Depan Digital.</p>
+            <div class="flex space-x-4">
+                <a class="text-[#dae2fd]/60 hover:text-[#00daf3] transition-all" href="mailto:herfiadireskialviansyah03@gmail.com"><span class="material-symbols-outlined" data-icon="email">email</span></a>
+                <a class="text-[#dae2fd]/60 hover:text-[#00daf3] transition-all" href="https://wa.me/6282285580351"><span class="material-symbols-outlined" data-icon="chat">chat</span></a>
+                <a class="text-[#dae2fd]/60 hover:text-[#00daf3] transition-all" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
+            </div>
+            <div class="mt-4">
+                <p class="text-[#dae2fd]/80 font-bold mb-1">WhatsApp Reski:</p>
+                <a href="https://wa.me/6282285580351" class="text-primary hover:underline">0822-8558-0351</a>
+            </div>
+        </div>
+        <div>
+            <h4 class="text-[#00daf3] font-bold mb-6 uppercase tracking-widest text-xs">Solutions</h4>
+            <ul class="space-y-4">
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="{{ url_for('gis') }}">Web GIS Development</a></li>
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="{{ url_for('portfolio') }}">Portfolio Websites</a></li>
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="#">Flask Solutions</a></li>
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="#">AI Custom Chatbots</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-[#00daf3] font-bold mb-6 uppercase tracking-widest text-xs">Navigation</h4>
+            <ul class="space-y-4">
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="{{ url_for('home') }}">Home</a></li>
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="{{ url_for('portfolio') }}">Portfolio</a></li>
+                <li><a class="text-[#dae2fd]/60 hover:text-[#59dad1] hover:translate-x-1 transition-all inline-block" href="{{ url_for('pricing') }}">Pricing</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-[#00daf3] font-bold mb-6 uppercase tracking-widest text-xs">Contact Form</h4>
+            <p class="text-[#dae2fd]/60 mb-4 text-xs">Email kami langsung ke: <br/><a href="mailto:herfiadireskialviansyah03@gmail.com" class="text-primary mt-1 inline-block">herfiadireskialviansyah03@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 py-8 border-t border-[#40484c]/10 text-center">
+        <p class="text-[#dae2fd]/40 text-xs">© 2024 Youker Web Solutions. Architecting Digital Environments.</p>
+    </div>
+</footer>
+
+<!-- Google Translate Widget Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'id', includedLanguages: 'id,en', autoDisplay: false}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- Scripts -->
+<script>
+    // Theme Toggle Logic (Invert Mode)
+    function toggleTheme() {
+        const html = document.getElementById('html-root');
+        const icon = document.getElementById('theme-icon');
+        if (html.classList.contains('light')) {
+            html.classList.remove('light');
+            icon.textContent = 'light_mode';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.classList.add('light');
+            icon.textContent = 'dark_mode';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // Load saved theme
+    document.addEventListener("DOMContentLoaded", () => {
+        if (localStorage.getItem('theme') === 'light') {
+            document.getElementById('html-root').classList.add('light');
+            document.getElementById('theme-icon').textContent = 'dark_mode';
+        }
+    });
+
+    // Language Toggle logic (interacts with Google Translate iframe)
+    let currentLang = 'id';
+    function toggleLanguage() {
+        const btn = document.getElementById('lang-toggle');
+        const combo = document.querySelector('.goog-te-combo');
+        if (!combo) return;
+
+        if (currentLang === 'id') {
+            combo.value = 'en';
+            combo.dispatchEvent(new Event('change'));
+            currentLang = 'en';
+            btn.textContent = 'ID';
+        } else {
+            combo.value = 'id';
+            combo.dispatchEvent(new Event('change'));
+            currentLang = 'id';
+            btn.textContent = 'EN';
+        }
+    }
+
+    // Chatbot Toggle
+    function toggleChat() {
+        const widget = document.getElementById('chatbot-widget');
+        widget.classList.toggle('hidden-chat');
+    }
+
+    // Handle Chat Submit
+    async function handleChatSubmit(e) {
+        e.preventDefault();
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        if (!message) return;
+
+        // Add user message to UI
+        const chatBox = document.getElementById('chat-messages');
+        chatBox.innerHTML += `<div class="msg-user message-bubble">${message}</div>`;
+        input.value = '';
+        
+        // Show typing indicator
+        const typingId = 'typing-' + Date.now();
+        chatBox.innerHTML += `<div id="${typingId}" class="msg-ai message-bubble animate-pulse">Mengetik...</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+            const resp = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message, lang: currentLang })
+            });
+            const data = await resp.json();
+            
+            document.getElementById(typingId).remove();
+            
+            if (data.success) {
+                // Add AI msg
+                chatBox.innerHTML += `<div class="msg-ai message-bubble">${data.reply.replace(/\\n/g, '<br>')}</div>`;
+            } else {
+                chatBox.innerHTML += `<div class="msg-ai message-bubble text-red-400">Error: ${data.error}</div>`;
+            }
+        } catch (err) {
+            document.getElementById(typingId).remove();
+            chatBox.innerHTML += `<div class="msg-ai message-bubble text-red-400">Network Error. Please try again.</div>`;
+        }
+        
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+
+<!-- Hide default google translate top bar -->
+<style>
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+</style>
+</body>
+</html>
